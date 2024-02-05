@@ -42,25 +42,33 @@ const CoutriesPage = () => {
   //       });
   //   }, []);
 
+  // useEffect(() => {
+  //   const fetchCountries = async () => {
+  //     try {
+  //       const response = await fetch(`${BASE_URL}/all`);
+  //       const data = await response.json();
+
+  //       const countriesData = data.map((country: Country) => ({
+  //         name: country.name,
+  //         capital: country.capital,
+  //       }));
+
+  //       setCountries(countriesData);
+  //     } catch (error) {
+  //       console.error("Error fetching contry data", error);
+  //     }
+  //   };
+
+  //   fetchCountries();
+  // }, []);
+
   useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/all`);
-        const data = await response.json();
-
-        const countriesData = data.map((country: Country) => ({
-          name: country.name,
-          capital: country.capital,
-        }));
-
-        setCountries(countriesData);
-      } catch (error) {
-        console.error("Error fetching contry data", error);
-      }
-    };
-
-    fetchCountries();
-  }, []);
+    fetch(`${BASE_URL}/all`)
+      .then((response) => response.json())
+      .then((data) => {
+        setCountries(data);
+      });
+  })
 
   return (
     <>
